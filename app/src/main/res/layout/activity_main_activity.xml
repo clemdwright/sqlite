@@ -8,40 +8,27 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context=".MainAcitivity">
 
-    <TextView
-        android:id="@+id/userName"
-        android:text="@string/user_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
     <EditText
-        android:id="@+id/userNameValue"
+        android:id="@+id/createName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/userName" >
+        android:hint="Create name">
         <requestFocus />
     </EditText>
 
-    <TextView
-        android:id="@+id/password"
-        android:text="@string/password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/userNameValue"/>
-
     <EditText
-        android:id="@+id/passwordValue"
+        android:id="@+id/createPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/password"
-        android:inputType="textPassword"/>
+        android:hint="Create password"
+        android:layout_below="@id/createName" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add user"
         android:id="@+id/addUser"
-        android:layout_below="@+id/passwordValue"
+        android:layout_below="@+id/createPassword"
         android:layout_centerHorizontal="true"
         android:onClick="addUser"/>
 
@@ -54,20 +41,23 @@
         android:layout_below="@+id/addUser"
         android:layout_centerHorizontal="true" />
 
-    <TextView
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Name to retrieve data for"
-        android:id="@+id/textView"
-        android:layout_below="@+id/viewDetails"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:id="@+id/enterName"
+        android:hint="Enter name"
+        android:layout_below="@id/viewDetails"/>
 
     <EditText
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/nameValue"
-        android:layout_below="@id/textView"/>
+        android:id="@+id/enterPassword"
+        android:hint="Enter password"
+        android:layout_below="@id/viewDetails"
+        android:layout_alignRight="@+id/getDetails"
+        android:layout_alignEnd="@+id/getDetails"
+        android:layout_toRightOf="@+id/enterName"
+        android:layout_toEndOf="@+id/enterName" />
 
     <Button
         android:layout_width="match_parent"
@@ -75,7 +65,7 @@
         android:text="Get details"
         android:id="@+id/getDetails"
         android:onClick="getDetails"
-        android:layout_below="@+id/nameValue"
+        android:layout_below="@+id/enterName"
         android:layout_centerHorizontal="true" />
 
     <Button
@@ -103,6 +93,15 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/oldName"
+        android:layout_below="@+id/getDetails"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:hint="Old name" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/newName"
         android:layout_alignTop="@+id/oldName"
         android:layout_alignRight="@+id/getDetails"
@@ -114,17 +113,6 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/oldName"
-        android:layout_below="@+id/getDetails"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/textView"
-        android:layout_alignEnd="@+id/textView"
-        android:hint="Old name" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/nameToDelete"
         android:layout_below="@+id/update"
         android:layout_alignParentLeft="true"
@@ -132,6 +120,5 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:hint="Name to delete" />
-
 
 </RelativeLayout>

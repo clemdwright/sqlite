@@ -46,7 +46,7 @@ public class VivzDatabaseAdapter {
 
     public String getData(String name, String password) {
 
-        //select _id from vivztable where name=? AND password=?
+        //select _id from vivztable where enterName=? AND password=?
 ;        SQLiteDatabase db = vivzHelper.getWritableDatabase();
 
         //select _id from VIVZTABLE

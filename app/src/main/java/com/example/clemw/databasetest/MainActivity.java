@@ -8,7 +8,7 @@ import android.widget.EditText;
 
 public class MainActivity extends Activity {
 
-    EditText userName, password, name, nameToDelete, oldName, newName;
+    EditText createName, password, enterName, enterPassword, nameToDelete, oldName, newName;
     VivzDatabaseAdapter vivzDatabaseAdapter;
 
     @Override
@@ -16,9 +16,10 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_activity);
 
-        userName = (EditText) findViewById(R.id.userNameValue);
-        password = (EditText) findViewById(R.id.passwordValue);
-        name = (EditText) findViewById(R.id.nameValue);
+        createName = (EditText) findViewById(R.id.createName);
+        password = (EditText) findViewById(R.id.createPassword);
+        enterName = (EditText) findViewById(R.id.enterName);
+        enterPassword = (EditText) findViewById(R.id.enterPassword);
         oldName = (EditText) findViewById(R.id.oldName);
         newName = (EditText) findViewById(R.id.newName);
         nameToDelete = (EditText) findViewById(R.id.nameToDelete);
@@ -28,7 +29,7 @@ public class MainActivity extends Activity {
     }
 
     public void addUser(View view) {
-        String user = userName.getText().toString();
+        String user = createName.getText().toString();
         String pass = password.getText().toString();
 
         long id = vivzDatabaseAdapter.insertData(user, pass);
@@ -45,12 +46,8 @@ public class MainActivity extends Activity {
     }
 
     public void getDetails(View view) {
-        //vivz abc
-        String s1 = name.getText().toString();
-        //vivz
-        String user = s1.substring(0, s1.indexOf(" "));
-        //abc
-        String pass = s1.substring(s1.indexOf(" ") + 1);
+        String user = enterName.getText().toString();
+        String pass = enterPassword.getText().toString();
         String _id = vivzDatabaseAdapter.getData(user, pass);
         Message.message(this, _id);
     }
