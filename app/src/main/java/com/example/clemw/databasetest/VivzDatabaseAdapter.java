@@ -86,11 +86,11 @@ public class VivzDatabaseAdapter {
         return count;
     }
 
-    public int deleteRow() {
+    public int deleteRow(String name) {
 
         //DELETE * FROM VIVZTABLE Where Name='vivz'
         SQLiteDatabase db = vivzHelper.getWritableDatabase();
-        String[] whereArgs={"vivz"};
+        String[] whereArgs={name};
         int count = db.delete(VivzHelper.TABLE_NAME, VivzHelper.NAME + "=?", whereArgs);
         return count;
 

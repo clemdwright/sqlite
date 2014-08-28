@@ -8,7 +8,7 @@ import android.widget.EditText;
 
 public class MainActivity extends Activity {
 
-    EditText userName, password, name;
+    EditText userName, password, name, nameToDelete, oldName, newName;
     VivzDatabaseAdapter vivzDatabaseAdapter;
 
     @Override
@@ -19,6 +19,9 @@ public class MainActivity extends Activity {
         userName = (EditText) findViewById(R.id.userNameValue);
         password = (EditText) findViewById(R.id.passwordValue);
         name = (EditText) findViewById(R.id.nameValue);
+        oldName = (EditText) findViewById(R.id.oldName);
+        newName = (EditText) findViewById(R.id.newName);
+        nameToDelete = (EditText) findViewById(R.id.nameToDelete);
 
         vivzDatabaseAdapter = new VivzDatabaseAdapter(this);
 
@@ -53,12 +56,18 @@ public class MainActivity extends Activity {
     }
 
     public void update(View view) {
-        vivzDatabaseAdapter.updateName("test", "vivz");
+
+        String oldString = oldName.getText().toString();
+        String newString = newName.getText().toString();
+
+        int count = vivzDatabaseAdapter.updateName(oldString, newString);
+        Message.message(this, "" + count);
     }
 
     public void delete(View view) {
 
-        int count = vivzDatabaseAdapter.deleteRow();
+        String name = nameToDelete.getText().toString();
+        int count = vivzDatabaseAdapter.deleteRow(name);
         Message.message(this, "" + count);
 
     }
