@@ -52,9 +52,14 @@ public class MainActivity extends Activity {
         Message.message(this, _id);
     }
 
-//    public void getDetails(View view) {
-//        String s1 = name.getText().toString();
-//        String s2 = vivzDatabaseAdapter.getData(s1);
-//        Message.message(this, s2);
-//    }
+    public void update(View view) {
+        vivzDatabaseAdapter.updateName("test", "vivz");
+    }
+
+    public void delete(View view) {
+
+        int count = vivzDatabaseAdapter.deleteRow();
+        Message.message(this, "" + count);
+
+    }
 }

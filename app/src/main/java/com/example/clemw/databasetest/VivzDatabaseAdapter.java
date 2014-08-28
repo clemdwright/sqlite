@@ -72,25 +72,29 @@ public class VivzDatabaseAdapter {
         return buffer.toString();
     }
 
-//    public String getData(String name) {
-//
-//        //select name, password from vivztable where name='anky'
-//        SQLiteDatabase db = vivzHelper.getWritableDatabase();
-//
-//        //select Name, Password from VIVZTABLE
-//        String[] columns = {VivzHelper.NAME, VivzHelper.PASSWORD};
-//        Cursor cursor = db.query(VivzHelper.TABLE_NAME, columns,
-//                VivzHelper.NAME + " = '" + name + "'", null, null, null, null);
-//        StringBuffer buffer = new StringBuffer();
-//        while (cursor.moveToNext()) {
-//            int index1 = cursor.getColumnIndex(VivzHelper.NAME);
-//            int index2 = cursor.getColumnIndex(VivzHelper.PASSWORD);
-//            String personName = cursor.getString(index1);
-//            String password = cursor.getString(index2);
-//            buffer.append(personName + " " + password + "\n");
-//        }
-//        return buffer.toString();
-//    }
+    public int updateName(String oldName, String newName) {
+        //UPDATE VIVZTABLE SET Name = 'vivz' where Name='test'
+        SQLiteDatabase db = vivzHelper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(VivzHelper.NAME, newName);
+        String[] whereArgs = {oldName};
+        int count = db.update(
+                VivzHelper.TABLE_NAME,
+                contentValues,
+                VivzHelper.NAME + " =? ",
+                whereArgs);
+        return count;
+    }
+
+    public int deleteRow() {
+
+        //DELETE * FROM VIVZTABLE Where Name='vivz'
+        SQLiteDatabase db = vivzHelper.getWritableDatabase();
+        String[] whereArgs={"vivz"};
+        int count = db.delete(VivzHelper.TABLE_NAME, VivzHelper.NAME + "=?", whereArgs);
+        return count;
+
+    }
 
     static class VivzHelper extends SQLiteOpenHelper {
         private static final String DATABASE_NAME = "vivzdatabase";
