@@ -8,7 +8,7 @@ import android.widget.EditText;
 
 public class MainActivity extends Activity {
 
-    EditText userName, password;
+    EditText userName, password, name;
     VivzDatabaseAdapter vivzDatabaseAdapter;
 
     @Override
@@ -18,6 +18,7 @@ public class MainActivity extends Activity {
 
         userName = (EditText) findViewById(R.id.userNameValue);
         password = (EditText) findViewById(R.id.passwordValue);
+        name = (EditText) findViewById(R.id.nameValue);
 
         vivzDatabaseAdapter = new VivzDatabaseAdapter(this);
 
@@ -38,5 +39,11 @@ public class MainActivity extends Activity {
     public void viewDetails (View view) {
         String data = vivzDatabaseAdapter.getAllData();
         Message.message(this, data);
+    }
+
+    public void getDetails(View view) {
+        String s1 = name.getText().toString();
+        String s2 = vivzDatabaseAdapter.getData(s1);
+        Message.message(this, s2);
     }
 }
