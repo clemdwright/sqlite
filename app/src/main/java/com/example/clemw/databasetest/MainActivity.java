@@ -42,8 +42,19 @@ public class MainActivity extends Activity {
     }
 
     public void getDetails(View view) {
+        //vivz abc
         String s1 = name.getText().toString();
-        String s2 = vivzDatabaseAdapter.getData(s1);
-        Message.message(this, s2);
+        //vivz
+        String user = s1.substring(0, s1.indexOf(" "));
+        //abc
+        String pass = s1.substring(s1.indexOf(" ") + 1);
+        String _id = vivzDatabaseAdapter.getData(user, pass);
+        Message.message(this, _id);
     }
+
+//    public void getDetails(View view) {
+//        String s1 = name.getText().toString();
+//        String s2 = vivzDatabaseAdapter.getData(s1);
+//        Message.message(this, s2);
+//    }
 }

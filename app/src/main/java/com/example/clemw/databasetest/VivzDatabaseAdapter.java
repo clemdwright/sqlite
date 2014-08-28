@@ -44,25 +44,53 @@ public class VivzDatabaseAdapter {
         return buffer.toString();
     }
 
-    public String getData(String name) {
+    public String getData(String name, String password) {
 
-        //select name, password from vivztable where name='anky'
-        SQLiteDatabase db = vivzHelper.getWritableDatabase();
+        //select _id from vivztable where name=? AND password=?
+;        SQLiteDatabase db = vivzHelper.getWritableDatabase();
 
-        //select Name, Password from VIVZTABLE
-        String[] columns = {VivzHelper.NAME, VivzHelper.PASSWORD};
-        Cursor cursor = db.query(VivzHelper.TABLE_NAME, columns,
-                VivzHelper.NAME + " = '" + name + "'", null, null, null, null);
+        //select _id from VIVZTABLE
+        String[] columns = {VivzHelper.UID};
+
+        //using these arguments
+        String[] selectionArgs = {name, password};
+
+        Cursor cursor = db.query(
+                VivzHelper.TABLE_NAME,
+                columns,
+                VivzHelper.NAME + " =? AND " +
+                VivzHelper.PASSWORD + " =?",
+                selectionArgs,
+                null, null, null);
+
         StringBuffer buffer = new StringBuffer();
         while (cursor.moveToNext()) {
-            int index1 = cursor.getColumnIndex(VivzHelper.NAME);
-            int index2 = cursor.getColumnIndex(VivzHelper.PASSWORD);
-            String personName = cursor.getString(index1);
-            String password = cursor.getString(index2);
-            buffer.append(personName + " " + password + "\n");
+            int uidColumnIndex = cursor.getColumnIndex(VivzHelper.UID);
+            String personId = cursor.getString(uidColumnIndex);
+            buffer.append(personId + "\n");
         }
         return buffer.toString();
     }
+
+//    public String getData(String name) {
+//
+//        //select name, password from vivztable where name='anky'
+//        SQLiteDatabase db = vivzHelper.getWritableDatabase();
+//
+//        //select Name, Password from VIVZTABLE
+//        String[] columns = {VivzHelper.NAME, VivzHelper.PASSWORD};
+//        Cursor cursor = db.query(VivzHelper.TABLE_NAME, columns,
+//                VivzHelper.NAME + " = '" + name + "'", null, null, null, null);
+//        StringBuffer buffer = new StringBuffer();
+//        while (cursor.moveToNext()) {
+//            int index1 = cursor.getColumnIndex(VivzHelper.NAME);
+//            int index2 = cursor.getColumnIndex(VivzHelper.PASSWORD);
+//            String personName = cursor.getString(index1);
+//            String password = cursor.getString(index2);
+//            buffer.append(personName + " " + password + "\n");
+//        }
+//        return buffer.toString();
+//    }
 
     static class VivzHelper extends SQLiteOpenHelper {
         private static final String DATABASE_NAME = "vivzdatabase";
