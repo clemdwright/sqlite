@@ -2,13 +2,14 @@ package com.example.clemw.databasetest;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
 
 public class MainActivity extends Activity {
 
-    EditText createName, createPlaceId, createRating, enterName, enterPassword, nameToDelete, oldName, newName;
+    EditText createName, createPlaceId, createRating, enterName, nameToDelete, oldName, newName;
     VivzDatabaseAdapter vivzDatabaseAdapter;
 
     @Override
@@ -20,7 +21,6 @@ public class MainActivity extends Activity {
         createPlaceId = (EditText) findViewById(R.id.createPlaceId);
         createRating = (EditText) findViewById(R.id.createRating);
         enterName = (EditText) findViewById(R.id.enterName);
-        enterPassword = (EditText) findViewById(R.id.enterPassword);
         oldName = (EditText) findViewById(R.id.oldName);
         newName = (EditText) findViewById(R.id.newName);
         nameToDelete = (EditText) findViewById(R.id.nameToDelete);
@@ -32,7 +32,8 @@ public class MainActivity extends Activity {
     public void addPlace(View view) {
         String name = createName.getText().toString();
         String placeId = createPlaceId.getText().toString();
-        int rating = createRating.getInputType();
+        int rating = Integer.parseInt(createRating.getText().toString());
+        Log.i("Rating Value", "" + rating);
 
         long id = vivzDatabaseAdapter.insertData(name, placeId, rating);
         if (id < 0) {
@@ -42,17 +43,16 @@ public class MainActivity extends Activity {
         }
     }
 
-//    public void viewDetails (View view) {
-//        String data = vivzDatabaseAdapter.getAllData();
-//        Message.message(this, data);
-//    }
-//
-//    public void getDetails(View view) {
-//        String user = enterName.getText().toString();
-//        String pass = enterPassword.getText().toString();
-//        String _id = vivzDatabaseAdapter.getData(user, pass);
-//        Message.message(this, _id);
-//    }
+    public void viewDetails (View view) {
+        String data = vivzDatabaseAdapter.getAllData();
+        Message.message(this, data);
+    }
+
+    public void getDetails(View view) {
+        String place = enterName.getText().toString();
+        String _id = vivzDatabaseAdapter.getData(place);
+        Message.message(this, _id);
+    }
 
     public void update(View view) {
 

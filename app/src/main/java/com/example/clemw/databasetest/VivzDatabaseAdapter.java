@@ -2,6 +2,7 @@ package com.example.clemw.databasetest;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -27,50 +28,54 @@ public class VivzDatabaseAdapter {
         return id;
     }
 
-//    public String getAllData() {
-//        SQLiteDatabase db = vivzHelper.getWritableDatabase();
-//
-//        //select _id, Name, Password from VIVZTABLE
-//        String[] columns = {VivzHelper.UID, VivzHelper.NAME, VivzHelper.PASSWORD};
-//        Cursor cursor = db.query(VivzHelper.TABLE_NAME, columns, null, null, null, null, null);
-//        StringBuffer buffer = new StringBuffer();
-//        while (cursor.moveToNext()) {
-////            int index1 = cursor.getColumnIndex(VivzHelper.UID); //better way of doing this, in case column positions change
-//            int cid = cursor.getInt(0); //not a robust way to do this, passing in int directly, because column positions could change
-//            String name = cursor.getString(1);
-//            String password = cursor.getString(2);
-//            buffer.append(cid + " " + name + " " + password + "\n");
-//        }
-//        return buffer.toString();
-//    }
+    public String getAllData() {
+        SQLiteDatabase db = vivzHelper.getWritableDatabase();
 
-//    public String getData(String name, String password) {
-//
-//        //select _id from vivztable where enterName=? AND createPlaceId=?
-//;        SQLiteDatabase db = vivzHelper.getWritableDatabase();
-//
-//        //select _id from VIVZTABLE
-//        String[] columns = {VivzHelper.UID};
-//
-//        //using these arguments
-//        String[] selectionArgs = {name, password};
-//
-//        Cursor cursor = db.query(
-//                VivzHelper.TABLE_NAME,
-//                columns,
-//                VivzHelper.NAME + " =? AND " +
-//                VivzHelper.PASSWORD + " =?",
-//                selectionArgs,
-//                null, null, null);
-//
-//        StringBuffer buffer = new StringBuffer();
-//        while (cursor.moveToNext()) {
-//            int uidColumnIndex = cursor.getColumnIndex(VivzHelper.UID);
-//            String personId = cursor.getString(uidColumnIndex);
-//            buffer.append(personId + "\n");
-//        }
-//        return buffer.toString();
-//    }
+        //select _id, Name, Password from VIVZTABLE
+        String[] columns = {VivzHelper.UID, VivzHelper.NAME, VivzHelper.PLACE_ID, VivzHelper.RATING};
+        Cursor cursor = db.query(VivzHelper.TABLE_NAME, columns, null, null, null, null, null);
+        StringBuffer buffer = new StringBuffer();
+        while (cursor.moveToNext()) {
+//            int index1 = cursor.getColumnIndex(VivzHelper.UID); //better way of doing this, in case column positions change
+            int uidIndex = cursor.getColumnIndex(VivzHelper.UID);
+            int nameIndex = cursor.getColumnIndex(VivzHelper.NAME);
+            int placeIdIndex = cursor.getColumnIndex(VivzHelper.PLACE_ID);
+            int ratingIndex = cursor.getColumnIndex(VivzHelper.RATING);
+            int uid = cursor.getInt(uidIndex); //not a robust way to do this, passing in int directly, because column positions could change
+            String name = cursor.getString(nameIndex);
+            String placeId = cursor.getString(placeIdIndex);
+            String rating = cursor.getString(ratingIndex);
+            buffer.append(uid + " " + name + " " + placeId + " " + rating + "\n");
+        }
+        return buffer.toString();
+    }
+
+    public String getData(String name) {
+
+        //select _id from vivztable where enterName=? AND createPlaceId=?
+;        SQLiteDatabase db = vivzHelper.getWritableDatabase();
+
+        //select _id from VIVZTABLE
+        String[] columns = {VivzHelper.UID};
+
+        //using these arguments
+        String[] selectionArgs = {name};
+
+        Cursor cursor = db.query(
+                VivzHelper.TABLE_NAME,
+                columns,
+                VivzHelper.NAME + " =?",
+                selectionArgs,
+                null, null, null);
+
+        StringBuffer buffer = new StringBuffer();
+        while (cursor.moveToNext()) {
+            int uidColumnIndex = cursor.getColumnIndex(VivzHelper.UID);
+            String personId = cursor.getString(uidColumnIndex);
+            buffer.append(personId + "\n");
+        }
+        return buffer.toString();
+    }
 
     public int updateName(String oldName, String newName) {
         //UPDATE VIVZTABLE SET Name = 'vivz' where Name='test'

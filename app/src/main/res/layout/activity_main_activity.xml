@@ -50,22 +50,11 @@
         android:layout_centerHorizontal="true" />
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/enterName"
         android:hint="Enter name"
         android:layout_below="@id/viewDetails"/>
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/enterPassword"
-        android:hint="Enter password"
-        android:layout_below="@id/viewDetails"
-        android:layout_alignRight="@+id/getDetails"
-        android:layout_alignEnd="@+id/getDetails"
-        android:layout_toRightOf="@+id/enterName"
-        android:layout_toEndOf="@+id/enterName" />
 
     <Button
         android:layout_width="match_parent"
