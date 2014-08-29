@@ -17,20 +17,28 @@
     </EditText>
 
     <EditText
-        android:id="@+id/createPassword"
+        android:id="@+id/createPlaceId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Create password"
+        android:hint="Create place_id"
         android:layout_below="@id/createName" />
+
+    <EditText
+        android:id="@+id/createRating"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:hint="Create rating"
+        android:layout_below="@id/createPlaceId" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add user"
-        android:id="@+id/addUser"
-        android:layout_below="@+id/createPassword"
+        android:text="Add place"
+        android:id="@+id/addPlace"
+        android:layout_below="@id/createRating"
         android:layout_centerHorizontal="true"
-        android:onClick="addUser"/>
+        android:onClick="addPlace"/>
 
     <Button
         android:layout_width="match_parent"
@@ -38,7 +46,7 @@
         android:text="View all details"
         android:id="@+id/viewDetails"
         android:onClick="viewDetails"
-        android:layout_below="@+id/addUser"
+        android:layout_below="@+id/addPlace"
         android:layout_centerHorizontal="true" />
 
     <EditText
